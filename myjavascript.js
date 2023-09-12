@@ -1,13 +1,18 @@
-console.log("Hello wORLD !")
-let arr = ["Rock", "Paper", "Scissors"];
+
+let choice = null;
+let playerScore = 0;
+let computerScore = 0;
+function game(){
+
+    do {
+
+        let arr = ["Rock", "Paper", "Scissors"];
 function getComputerChoice(){
     return (arr[(Math.floor(Math.random() * arr.length))]);
 }
 
 let theComputerChoice = getComputerChoice();
 console.log(theComputerChoice);
-
-let choice = null;
 
 function getPlayerChoice(){
     next = false;
@@ -32,21 +37,21 @@ choice = getPlayerChoice();
 console.log(choice);
 
 function pickedRock(computersChoice){
-    if (computersChoice == "Rock") console.log("You tied, Rock ties with Rock");
-    else if (computersChoice == "Paper") console.log("You lost, Rock loses to Paper");
-    else if (computersChoice == "Scissors") console.log("You won, Rock beats Scissors");
+    if (computersChoice == "Rock") { console.log("You tied, Rock ties with Rock"); }
+    else if (computersChoice == "Paper") { console.log("You lost, Rock loses to Paper"); computerScore++;}
+    else if (computersChoice == "Scissors") {console.log("You won, Rock beats Scissors"); playerScore++}
 }
 
 function pickedScissors(computersChoice){
-    if (computersChoice == "Rock") console.log("You lost, Scissors loses to Rock");
-    else if (computersChoice == "Paper") console.log("You won, Scissors beats Paper");
+    if (computersChoice == "Rock") {console.log("You lost, Scissors loses to Rock"); computerScore++; }
+    else if (computersChoice == "Paper") {console.log("You won, Scissors beats Paper"); playerScore++ }
     else if (computersChoice == "Scissors") console.log("You tied, Scissors ties with Scissors");
 }
 
 function pickedPaper(computersChoice){
-    if (computersChoice == "Rock") console.log("You won, Paper beats Rock");
+    if (computersChoice == "Rock") {console.log("You won, Paper beats Rock"); playerScore++; }
     else if (computersChoice == "Paper") console.log("You tied, Paper ties with Paper");
-    else if (computersChoice == "Scissors") console.log("You lost, Paper loses to Scissors");
+    else if (computersChoice == "Scissors") {console.log("You lost, Paper loses to Scissors"); computerScore++}
 }
 
 function playRound(playersChoice, computersChoice)
@@ -58,3 +63,25 @@ function playRound(playersChoice, computersChoice)
     }
 
 console.log(playRound(choice,theComputerChoice));
+console.log("Player score is " + playerScore);
+console.log("Computer score is " + computerScore);
+    }while ((playerScore < 5 && computerScore !=5) || (computerScore < 5 && playerScore !=5))
+
+
+function rematch(){
+    let answer = parseInt(prompt("press 1 for rematch 2 for ending"));
+    if (answer == 1){
+        theComputerChoice = getComputerChoice();
+        getPlayerChoice();
+        console.log(playRound(choice,theComputerChoice));
+        rematch();
+    }
+    else console.log("Finished");
+}
+
+}
+
+game(); 
+
+if (playerScore == 5) console.log("You won!")
+else console.log("You lost!")
