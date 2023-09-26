@@ -1,10 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left : 250px;
+            padding-right: 250px;
+            flex-wrap: wrap;
+        }
+
+        .header {
+            display:flex;
+            justify-content: space-between;
+            padding-left : 50px;
+            padding-right: 50px;
+        }
+
+        .adjust {
+            margin-left: 150px;
+        }
+
+        p{
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        button {
+            height: 120px;
+            width: 360px;
+            min-width: 220px;
+            border-color: black;
+            border-radius: 8px;
+            border-width: thick thick;
+            font-size: 48px;
+            font-weight: 800;
+        }
+
+        #rockPicked {
+            background-color: burlywood;
+            color: white;
+        }
+
+        #paperPicked{
+            background-color: white;
+            color:black;
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="myjavascript.js"></script> 
+    <div class = "header">
+        <div>
+            <p>Player Score:</p> <div class = "adjust"><p id="playerScore"></p></div>
+        </div>
+        <p id="playerEmoji"> </p><p id="computerEmoji"> </p>
+        <div>
+            <p>Computer Score:</p> <div class = "adjust"><p id="computerScore"></p></div>
+        </div>   
+    </div>
+    
+    <div class="container">
+        <button id="rockPicked">Rock</button>
+        <button id="paperPicked">Paper</button>
+        <button id="scissorsPicked">Scissors</button>
+    </div>
+    <script defer src="myjavascript.js"></script> 
 </head>
 <body>
     

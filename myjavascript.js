@@ -1,71 +1,46 @@
 let choice = null;
-let playerScore = 0;
-let computerScore = 0;
+let selected = 0;
+const Rockbtn = document.querySelector("#rockPicked");
+const Paperbtn = document.querySelector("#paperPicked");
+const Scissorsbtn = document.querySelector("#scissorsPicked");
+let playerScore = document.querySelector("#playerScore");
+let computerScore = document.querySelector("#computerScore");
+let PLAYERscore = 0; document.getElementById("playerScore").innerHTML = PLAYERscore;
+let COMPUTERscore = 0; document.getElementById("computerScore").innerHTML = COMPUTERscore;
 
-function game(){
-    do {
 
         let arr = ["Rock", "Paper", "Scissors"];
-        function getComputerChoice(){
-        return (arr[(Math.floor(Math.random() * arr.length))]);
-                                    }   
-
+        function getComputerChoice(){ return (arr[(Math.floor(Math.random() * arr.length))]); }
+        
         let theComputerChoice = getComputerChoice();
-        console.log(theComputerChoice);
 
-        function getPlayerChoice(){
-        next = false;
-        do {
-            choice = parseInt(prompt("press 1 for Rock 2 for Paper 3 for Scissors"));
-            switch(choice){
-            case 1:
-                choice = "Rock"; next = false;  break;
-            case 2:
-                choice = "Paper"; next = false;  break;
-            case 3:
-                choice = "Scissors"; next = false; break;
-            default:
-                choice = "invalid"; next = true;
-                        }
-        }while(next);
-    
-        return choice;
-                                }
-
-        choice = getPlayerChoice();
-        console.log(choice);
+        Rockbtn.addEventListener("click", (e) => {
+                choice = "Rock"; theComputerChoice = getComputerChoice(); pickedRock(theComputerChoice);
+                });
+        Paperbtn.addEventListener("click", (e) => {
+                choice = "Paper";  theComputerChoice = getComputerChoice(); pickedPaper(theComputerChoice);
+                });
+        Scissorsbtn.addEventListener("click", (e) => {
+                choice = "Rock"; theComputerChoice = getComputerChoice(); pickedScissors(theComputerChoice);
+                });
 
         function pickedRock(computersChoice){
-            if (computersChoice == "Rock") { console.log("You tied, Rock ties with Rock"); }
-            else if (computersChoice == "Paper") { console.log("You lost, Rock loses to Paper"); computerScore++;}
-            else if (computersChoice == "Scissors") {console.log("You won, Rock beats Scissors"); playerScore++}
+            if (computersChoice == "Rock") { console.log("You tied, Rock ties with Rock"); document.getElementById("playerEmoji").innerHTML = "✊"; document.getElementById("computerEmoji").innerHTML = "✊"; }
+            else if (computersChoice == "Paper") { console.log("You lost, Rock loses to Paper"); COMPUTERscore ++; document.getElementById("computerScore").innerHTML = COMPUTERscore; document.getElementById("playerEmoji").innerHTML = "✊"; document.getElementById("computerEmoji").innerHTML = "🖐️"; }
+            else if (computersChoice == "Scissors") {console.log("You won, Rock beats Scissors"); PLAYERscore ++; document.getElementById("playerScore").innerHTML = PLAYERscore; document.getElementById("playerEmoji").innerHTML = "✊"; document.getElementById("computerEmoji").innerHTML = "✌️";}
                                             }
 
         function pickedScissors(computersChoice){
-            if (computersChoice == "Rock") {console.log("You lost, Scissors loses to Rock"); computerScore++; }
-            else if (computersChoice == "Paper") {console.log("You won, Scissors beats Paper"); playerScore++ }
-            else if (computersChoice == "Scissors") console.log("You tied, Scissors ties with Scissors");
+            if (computersChoice == "Rock") {console.log("You lost, Scissors loses to Rock"); COMPUTERscore ++; document.getElementById("computerScore").innerHTML = COMPUTERscore;document.getElementById("playerEmoji").innerHTML = "✌️"; document.getElementById("computerEmoji").innerHTML = "✊";}
+            else if (computersChoice == "Paper") {console.log("You won, Scissors beats Paper"); PLAYERscore ++; document.getElementById("playerScore").innerHTML = PLAYERscore; document.getElementById("playerEmoji").innerHTML = "✌️"; document.getElementById("computerEmoji").innerHTML = "🖐️";  }  
+            else if (computersChoice == "Scissors") {console.log("You tied, Scissors ties with Scissors"); document.getElementById("playerEmoji").innerHTML = "✌️"; document.getElementById("computerEmoji").innerHTML = "✌️"; }
                                                 }
 
         function pickedPaper(computersChoice){
-            if (computersChoice == "Rock") {console.log("You won, Paper beats Rock"); playerScore++; }
-            else if (computersChoice == "Paper") console.log("You tied, Paper ties with Paper");
-            else if (computersChoice == "Scissors") {console.log("You lost, Paper loses to Scissors"); computerScore++}
+            if (computersChoice == "Rock") {console.log("You won, Paper beats Rock"); PLAYERscore ++; document.getElementById("playerScore").innerHTML = PLAYERscore; document.getElementById("playerEmoji").innerHTML = "🖐️";document.getElementById("computerEmoji").innerHTML = "✊"; }
+            else if (computersChoice == "Paper") { console.log("You tied, Paper ties with Paper"); document.getElementById("playerEmoji").innerHTML = "🖐️"; document.getElementById("computerEmoji").innerHTML = "🖐️"; }
+            else if (computersChoice == "Scissors") {console.log("You lost, Paper loses to Scissors"); COMPUTERscore ++; document.getElementById("computerScore").innerHTML = COMPUTERscore; document.getElementById("playerEmoji").innerHTML = "🖐️"; document.getElementById("computerEmoji").innerHTML = "✌️"; }
                                             }
-
-        function playRound(playersChoice, computersChoice){
-            if (playersChoice == "Rock") console.log(pickedRock(computersChoice));
-            else if (playersChoice == "Paper") console.log(pickedPaper(computersChoice));
-            else if (playersChoice == "Scissors") console.log(pickedScissors(computersChoice));
-                                                          }
-
-        console.log(playRound(choice,theComputerChoice));
-        console.log("Player score is " + playerScore);
-        console.log("Computer score is " + computerScore);
-    }while ((playerScore < 5 && computerScore !=5) || (computerScore < 5 && playerScore !=5))
-
-
-}
 
 function rematch(){
     let answer = parseInt(prompt("press 1 for rematch 2 for ending"));
@@ -74,8 +49,3 @@ function rematch(){
     }
     else console.log("Finished");
 }
-
-game(); 
-if (playerScore == 5) console.log("You won!")
-else console.log("You lost!")
-rematch();
